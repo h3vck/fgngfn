@@ -7,24 +7,26 @@ export default defineConfig({
   resolve: {
     extensions: ['.js', '.jsx', '.ts', '.tsx', '.json'],
     alias: {
-      'vaul@1.1.2': 'vaul',
-      'sonner@2.0.3': 'sonner',
-      'recharts@2.15.2': 'recharts',
-      'react-resizable-panels@2.1.7': 'react-resizable-panels',
-      'react-hook-form@7.55.0': 'react-hook-form',
-      'react-day-picker@8.10.1': 'react-day-picker',
-      '@radix-ui/react-aspect-ratio@1.1.2': '@radix-ui/react-aspect-ratio',
-      '@radix-ui/react-alert-dialog@1.1.6': '@radix-ui/react-alert-dialog',
-      '@radix-ui/react-accordion@1.2.3': '@radix-ui/react-accordion',
       '@': path.resolve(__dirname, './src'),
+      // пример для конкретного файла
+      'asset-image': path.resolve(__dirname, './src/assets/a961f3deed9b36e975c032f2c124a4e49ba9d072.png'),
     },
   },
   build: {
-    target: 'esnext',
-    outDir: 'dist', // ✅ теперь подходит для Vercel
+    target: 'es2020', // стабильный таргет для Vercel
+    outDir: 'dist',   // папка для деплоя
+    chunkSizeWarningLimit: 2000, // отключаем лишние предупреждения
+    rollupOptions: {
+      output: {
+        manualChunks(id) {
+          if (id.includes('node_modules')) return 'vendor';
+        },
+      },
+    },
   },
   server: {
     port: 3000,
     open: true,
   },
 });
+
