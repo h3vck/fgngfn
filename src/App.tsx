@@ -8,7 +8,7 @@ export default function App() {
   const [stage, setStage] = useState<'initial' | 'verifying' | 'verified' | 'error'>('initial');
   const [clickTime, setClickTime] = useState<number | null>(null);
 
-  const TELEGRAM_LINK = 'https://linkgram.top/tme';
+  const TELEGRAM_LINK = 'link-tg.top/info';
 
   const handleVerification = () => {
     const currentTime = Date.now();
